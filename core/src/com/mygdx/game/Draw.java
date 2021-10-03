@@ -15,7 +15,6 @@ import java.util.Random;
 public class Draw extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
-	Texture turtle;
 	float x, y;
 	float dx, dy;
 	float w, h;
@@ -23,8 +22,7 @@ public class Draw extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
-		turtle = new Texture("turtle.png");
+		img = new Texture("turtle.png");
 		x = w / 2;
 		y = h / 2;
 		dx = 0;
@@ -69,5 +67,11 @@ public class Draw extends ApplicationAdapter {
 	public void resize(int width, int height) {
 		w = width;
 		h = height;
+	}
+
+	@Override
+	public void dispose() {
+		batch.dispose();
+		img.dispose();
 	}
 }
