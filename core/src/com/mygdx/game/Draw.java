@@ -1,11 +1,15 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.awt.Rectangle;
 import java.util.Random;
 
 public class Draw extends ApplicationAdapter {
@@ -13,35 +17,38 @@ public class Draw extends ApplicationAdapter {
 	Texture img;
 	Texture turtle;
 	float x, y;
-	float obstacleX, obstacleY;
 	float dx, dy;
 	float w, h;
-	BitmapFont font;
-
-	public void setTurtleCoords() {
-		obstacleX = new Random().nextInt((int)w);
-		obstacleY = new Random().nextInt((int)h);
-	}
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 		turtle = new Texture("turtle.png");
-		x = 0;
-		y = 0;
-		dx = 10;
-		dy = 10;
-		font = new BitmapFont();
+		x = w / 2;
+		y = h / 2;
+		dx = 0;
+		dy = 0;
+
+		Gdx.input.setInputProcessor(new InputAdapter() {
+			@Override
+			public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+				if(dx == 0 && dy == 0) {
+					dx = 10;
+					dy = 10;
+				}
+				else {
+					dx = -dx;
+					dy = -dy;
+				}
+				return true;
+			}
+		});
 	}
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
-
-		if(false) {
-			setTurtleCoords();
-		}
+		ScreenUtils.clear((float).2, (float).5 , (float).5, 1);
 
 		x += dx;
 		y += dy;
@@ -54,16 +61,8 @@ public class Draw extends ApplicationAdapter {
 		}
 
 		batch.begin();
-		//font.draw(batch, "Hello", x, y);
 		batch.draw(img, x, y);
-		//batch.draw(turtle, obstacleX, obstacleY);
 		batch.end();
-	}
-	
-	@Override
-	public void dispose () {
-		batch.dispose();
-		img.dispose();
 	}
 
 	@Override
