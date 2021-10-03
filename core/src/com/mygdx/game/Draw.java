@@ -39,24 +39,24 @@ public class Draw extends ApplicationAdapter {
 	public void render () {
 		ScreenUtils.clear(1, 0, 0, 1);
 
-		if(true) {
+		if(false) {
 			setTurtleCoords();
 		}
 
 		x += dx;
 		y += dy;
 
-		if(x > w || x < 0) {
+		if(x > w - img.getWidth() || x < 0) {
 			dx = -dx;
 		}
-		if(y > h || y < 0) {
+		if(y > h - img.getHeight() || y < 0) {
 			dy = -dy;
 		}
 
 		batch.begin();
 		//font.draw(batch, "Hello", x, y);
 		batch.draw(img, x, y);
-		batch.draw(turtle, obstacleX, obstacleY);
+		//batch.draw(turtle, obstacleX, obstacleY);
 		batch.end();
 	}
 	
