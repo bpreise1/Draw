@@ -28,6 +28,7 @@ public class Draw extends ApplicationAdapter {
 		dx = 0;
 		dy = 0;
 
+		//Handle screen tap
 		Gdx.input.setInputProcessor(new InputAdapter() {
 			@Override
 			public boolean touchDown(int screenX, int screenY, int pointer, int button) {
@@ -51,6 +52,7 @@ public class Draw extends ApplicationAdapter {
 		x += dx;
 		y += dy;
 
+		//reverse directions when edge is hit
 		if(x > w - img.getWidth() || x < 0) {
 			dx = -dx;
 		}
@@ -64,7 +66,7 @@ public class Draw extends ApplicationAdapter {
 	}
 
 	@Override
-	public void resize(int width, int height) {
+	public void resize(int width, int height) {//get width and height
 		w = width;
 		h = height;
 	}
